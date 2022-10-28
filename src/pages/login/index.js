@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import { AiOutlineLock } from "react-icons/ai";
 import Shadow from "../../components/Shadow";
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -11,6 +13,11 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const navigation = useNavigate()
+
+  //FIREBASE AUTH
+  const auth = getAuth();
+
 
   const handleStatusChange = () => {
       setShow(!show)
@@ -31,11 +38,14 @@ const Login = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault()
+
+      const emailRex = email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+      const passwordRex = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}/);
       
       if (!email) {
         setEmailError("Email is required.");
       } else {
-        if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+        if (!emailRex) {
           setEmailError("Please entered a valid email address");
         }
       }
@@ -43,11 +53,44 @@ const Login = () => {
       if(!password){
         setPasswordError('Password is Required *')
       }else{
-        if(!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}/)){
+        if(!passwordRex){
           setPasswordError("Please entered a valid password")
         }
       }
+
+      if(email && password && emailRex && passwordRex){
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          // ...
+        })
+        .then(()=>{
+          const resolver = new Promise(resolve => setTimeout(resolve, 1000));
+          toast.promise(
+            resolver,
+              {
+                pending: 'Loading...',
+                success: 'Login Successful 👌',
+                error: 'Login Failed 🤯'
+              }
+          ).then(()=>{
+            setTimeout(()=>{
+              navigation('/')
+            },2000)
+          })
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          console.log(errorMessage)
+        });
+      }
+
+
     }
+
   
   return (
     <div className=" relative bg-[#0E1628] w-full">

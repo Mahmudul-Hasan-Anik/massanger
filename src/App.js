@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
@@ -15,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
     <ToastContainer
-      position="top-right"
+      position="top-center"
       autoClose={2000}
       limit={1}
       hideProgressBar={false}
@@ -24,6 +25,7 @@ function App() {
       rtl={false}
       pauseOnFocusLoss
       theme="light"
+      transition={Slide}
     />
     <Routes>
       <Route path='/' element={<Home/>}>

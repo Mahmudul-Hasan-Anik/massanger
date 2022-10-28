@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import { AiOutlineLock } from "react-icons/ai";
@@ -18,6 +18,8 @@ const Registration = () => {
   const [passwordError, setPasswordError] = useState('')
   const [success, setSuccess] = useState('')
   const [failed, setFailed] = useState('')
+
+  const navigation = useNavigate()
 
 // firebase
 const auth = getAuth();
@@ -82,7 +84,19 @@ const auth = getAuth();
             const user = userCredential.user;
           })
           .then(()=>{
-            toast.success('Registration Successful')
+            const resolver = new Promise(resolve => setTimeout(resolve, 3000));
+            toast.promise(
+              resolver,
+                {
+                  pending: 'Loading...',
+                  success: 'Registration Successful 👌',
+                  error: 'Registration Failed 🤯'
+                }
+            ).then(()=>{
+              setTimeout(()=>{
+                navigation('/login')
+              },2000)
+            })
           })
           .catch((error) => {
             const errorCode = error.code;
