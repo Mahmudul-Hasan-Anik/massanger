@@ -1,8 +1,9 @@
 import React from 'react'
+import SidebarLayout from '../../components/SidebarLayout'
 
 const CallList = () => {
   return (
-    <div>CallList</div>
+    <SidebarLayout>CallList</SidebarLayout>
   )
 }
 

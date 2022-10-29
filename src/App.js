@@ -29,14 +29,16 @@ function App() {
     />
     <Routes>
       <Route path='/' element={<Home/>}>
-        <Route path='/profile' element={<Profile/>}/>
         <Route index element={<ConversationList/>}/>
+        <Route path='/conversation' element={<ConversationList/>}/>
+        <Route path='/profile' element={<Profile/>}/>
         <Route path='/group' element={<GroupMassage/>}/>
         <Route path='/notification' element={<Notification/>}/>
         <Route path='/list' element={<Contact/>}/>
         <Route path='/call' element={<CallList/>}/>
         <Route path='/settings' element={<Settings/>}/>
       </Route>
+
       <Route path='/login' element={<Login/>}/>
       <Route path='/registration' element={<Registration/>}/>
     </Routes>

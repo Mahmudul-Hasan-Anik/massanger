@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import SidebarLayout from '../../components/SidebarLayout'
 
 const listOfConversation = [
     {
@@ -60,7 +61,7 @@ const ConversationList = () => {
         console.log('click hoici')
     }
   return (
-   <div className=' mt-5 '>
+   <SidebarLayout className=' mt-5 '>
     <p className=' text-xs px-5 mb-2'>Recent</p>
     { listOfConversation.map((item)=>(
         <div key={item.id} className='flex justify-between gap-3 hover:bg-[#16274f] focus:bg-[#16274f] px-3 py-2 w-full' onClick={(e)=>handleClick(item.id)}>
@@ -78,7 +79,7 @@ const ConversationList = () => {
             </div>
         </div>
     ))}
-   </div>
+   </SidebarLayout>
   )
 }
 

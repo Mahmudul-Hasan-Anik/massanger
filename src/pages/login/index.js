@@ -63,7 +63,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          // ...
         })
         .then(()=>{
           const resolver = new Promise(resolve => setTimeout(resolve, 1000));
@@ -76,7 +75,7 @@ const Login = () => {
               }
           ).then(()=>{
             setTimeout(()=>{
-              navigation('/')
+              navigation('/profile')
             },2000)
           })
         })

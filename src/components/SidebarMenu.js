@@ -11,18 +11,18 @@ import NotificationSvg from '../asset/svg/NotificationSvg';
 const SidebarMenu = ({props}) => {
   
   // Decide what show in ui
-    let activeStyle = "flex items-center py-2 px-3 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black";
+    let activeStyle = "flex items-center py-2 px-3 text-base font-normal text-white rounded-lg hover:bg-gray-100 hover:text-black";
   
-    let activeclassNameName = "flex items-center py-2 px-3 text-base font-normal text-white rounded-lg dark:text-white bg-gray-100 hover:text-black";
+    let activeclassName = "flex items-center py-2 px-3 text-base font-normal text-white rounded-lg bg-gray-100 hover:text-black";
     
   return (
    <div className=' flex flex-col relative'>
    <div className=" mb-64">
       <ul className="space-y-2">
          <NavLink
-            to="/"
+            to="/conversation"
             className={({ isActive }) =>
-              isActive ? activeclassNameName : activeStyle
+              isActive ? activeclassName : activeStyle
             }
           >
             <MassageListSvg/>
@@ -30,7 +30,7 @@ const SidebarMenu = ({props}) => {
          <NavLink
             to="/list"
             className={({ isActive }) =>
-              isActive ? activeclassNameName : activeStyle
+              isActive ? activeclassName : activeStyle
             }
           >
             <FriendListSvg/>
@@ -38,7 +38,7 @@ const SidebarMenu = ({props}) => {
          <NavLink
             to="/call"
             className={({ isActive }) =>
-              isActive ? activeclassNameName : activeStyle
+              isActive ? activeclassName : activeStyle
             }
           >
             <CallListSvg/> 
@@ -46,7 +46,7 @@ const SidebarMenu = ({props}) => {
          <NavLink
             to="/group"
             className={({ isActive }) =>
-              isActive ? activeclassNameName : activeStyle
+              isActive ? activeclassName : activeStyle
             }
           >
             <GroupSvg/> 
@@ -54,7 +54,7 @@ const SidebarMenu = ({props}) => {
          <NavLink
             to="/notification"
             className={({ isActive }) =>
-              isActive ? activeclassNameName : activeStyle
+              isActive ? activeclassName : activeStyle
             }
           >
             <NotificationSvg/>

@@ -1,8 +1,9 @@
 import React from 'react'
+import SidebarLayout from '../../components/SidebarLayout'
 
 const GroupMassage = () => {
   return (
-    <div>GroupMassage</div>
+    <SidebarLayout>GroupMassage</SidebarLayout>
   )
 }
 
